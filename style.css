@@ -1,0 +1,19 @@
+/*
+Theme Name: Honqgi Armenia
+Theme URI: https://nicepage.com/wordpress
+
+
+Description: Honqgi_Armenia v.3.29.1
+Tags: left-sidebar, right-sidebar, custom-background, custom-colors, blog
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Version: 1.0
+Text Domain: honqgi
+*/
+
+body {
+    color: #282828;
+    margin: 0 auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
