@@ -1,21 +1,10 @@
-function anchorPoint(selector) {
-    const target = jQuery(selector);
-    if (target.length) {
-        jQuery('html, body').animate(
-            {
-                scrollTop: target.offset().top - 80,
-            },
-            600 // duration of the scroll animation in milliseconds
-        );
-    }
-}
 document.addEventListener("DOMContentLoaded", function () {
     window.scrollTo(0, 0); // Scroll to the top-left corner of the page
 });
 
 document.addEventListener("DOMContentLoaded", function () {
     // Select all elements with the class 'd-opacity'
-    const elements = document.querySelectorAll(".d-opacity, .d-ani");
+    const elements = document.querySelectorAll(".d-opacity");
     console.log('elements',elements);
     // Create an IntersectionObserver
     const observer = new IntersectionObserver(
@@ -38,12 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // car models by category in home page
 jQuery(document).ready(function ($) {
-    // Check active menu item
-    if(jQuery('.single-car-model').length) {
-        jQuery('.models-menu-item').addClass('current-menu-item');
-    }
-
-
     // Handle category click
     $('.categories-tabs li.category-tab').on('click', function () {
         // Remove 'active' class from all categories
@@ -93,21 +76,6 @@ jQuery(document).ready(function ($) {
         $('.describe-group .describe-item h2').text(title);
         $('.describe-group .describe-item a').attr('href', link);
     });
-
-    // INIT ABOVE CLICK
-
-
-    function initInSlider() {
-        let firstElement = $('section.categories-and-models ul.cartype-car li').first();
-        const data_key = firstElement.attr('data-key');
-        const targetPost = $('.car-'+data_key);
-        let link = targetPost.attr('data-link');
-        let title = targetPost.attr('data-title');
-        $('.describe-group .describe-item h2').text(title);
-        $('.describe-group .describe-item a').attr('href', link);
-    }
-
-    initInSlider();
 
 
 });

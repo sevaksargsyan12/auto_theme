@@ -1,3 +1,6 @@
+
+jQuery(function ($) {
+
 window.onscroll = function () {
     Limg();
     var windST = $(window).scrollTop();
@@ -2131,5 +2134,7 @@ setTimeout(()=>{
         }
     });
 },0)
+
+})
 
 

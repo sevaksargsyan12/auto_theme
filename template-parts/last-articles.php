@@ -33,7 +33,7 @@ $recent_posts = get_posts($args);
 
 $i = 0;?>
 
-<h2 class="new-added mt-8">Նոր ավելացվածներ</h1>
+<h1 class="new-added mt-8">Նոր ավելացվածներ</h1>
 <?php
 echo '<div class="row">';
 if ($recent_posts) {

@@ -22,7 +22,18 @@ function custom_admin_styles() {
 add_action('admin_enqueue_scripts', 'custom_admin_styles');
 
 function custom_theme_scripts() {
-    // Enqueue the favicon
+
+    wp_enqueue_style(
+        'google-fonts-montserrat',
+        'https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap',
+        [],
+        null
+    );
+
+
+	wp_enqueue_style('theme-style', get_stylesheet_uri());
+
+	// Enqueue the favicon
     wp_enqueue_script('custom-favicon', get_template_directory_uri() . '/images/logo.svg', array(), null, false);
 
     // Enqueue the main stylesheet
@@ -34,32 +45,32 @@ function custom_theme_scripts() {
     // Enqueue Bootstrap CSS
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/bootstrap-5.0.2-dist/css/bootstrap.min.css');
 
-    // Enqueue Slick slider CSS
-    wp_enqueue_style('slick-css', get_template_directory_uri() . '/slick-master/slick/slick.css');
-    wp_enqueue_style('slick-theme-css', get_template_directory_uri() . '/slick-master/slick/slick-theme.css');
+    // Enqueue Singla car post css
+	wp_enqueue_style('single-car-post', get_stylesheet_directory_uri() . '/css/single-car-post.css');
 
 
-    wp_enqueue_script('jquery');
+	// Enqueue Slick slider CSS
+//    wp_enqueue_style('slick-css', get_template_directory_uri() . '/slick-master/slick/slick.css');
+//    wp_enqueue_style('slick-theme-css', get_template_directory_uri() . '/slick-master/slick/slick-theme.css');
 
-//    // Enqueue Slick slider scripts
-//    wp_enqueue_script('slick-slider', get_template_directory_uri() . '/slick-master/slick/slick.min.js', array('jquery'), null, true);
+
+	// Enqueue other scripts to load in the footer
+	wp_enqueue_script('jquery');
+
+//	wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js', array(), '', true);
+//	wp_enqueue_script('hqg-public-js', get_template_directory_uri() . '/js/public.js', array('jquery'));
+//	wp_enqueue_script('hqg-common-js', get_template_directory_uri() . '/js/common.js', array('jquery'));
+//	wp_enqueue_script('hqg-index-js', get_template_directory_uri() . '/js/index.js', array('jquery'));
+
+    wp_enqueue_script('hgq-single-car-post-js', get_template_directory_uri() . '/js/single-car-post.js', array('jquery'));
+    wp_enqueue_script('hgq-custom-js', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'));
+
+//    $translation_array = array(
+//        'ajax_url' => admin_url('admin-ajax.php'),
+//        'directory_uri' =>  get_template_directory_uri(),
 //
-//    // Enqueue Bootstrap Bundle JS
-//    wp_enqueue_script('bootstrap-bundle', get_template_directory_uri() . '/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
-//
-//
-//	// Enqueue custom JavaScript file
-//	wp_enqueue_script('custom-lightbox-js', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), null, true);
-//
-//    // Enqueue custom JavaScript file
-//    wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'), null, true);
-
-    $translation_array = array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'directory_uri' =>  get_template_directory_uri(),
-
-    );
-    wp_localize_script('custom-js', 'custom_ajax_object', $translation_array);
+//    );
+//    wp_localize_script('custom-js', 'custom_ajax_object', $translation_array);
 
 }
 
@@ -167,14 +178,149 @@ function acf_set_featured_image($value, $post_id, $field)
 // acf/update_value/name={$field_name} - filter for a specific field based on it's name
 add_filter('acf/update_value/name=services', 'acf_set_featured_image', 10, 3);
 
-function custom_excerpt_length($length) {
-	return 30; // Adjust the number of words in the excerpt
-}
-add_filter('excerpt_length', 'custom_excerpt_length');
+//function custom_excerpt_length($length) {
+//	return 30; // Adjust the number of words in the excerpt
+//}
+//add_filter('excerpt_length', 'custom_excerpt_length');
+//
+//// Modify the post excerpt "read more" text
+//function custom_excerpt_more($more) {
+////	return '... <a class="read-more" href="' . get_permalink() . '">' . __('Read More', 'text-domain') . '</a>';
+//	return '...';
+//}
+//add_filter('excerpt_more', 'custom_excerpt_more');
 
-// Modify the post excerpt "read more" text
-function custom_excerpt_more($more) {
-//	return '... <a class="read-more" href="' . get_permalink() . '">' . __('Read More', 'text-domain') . '</a>';
-	return '...';
+function custom_excerpt($content, $limit = 100) {
+    // Strip shortcodes and tags
+    $content = wp_strip_all_tags(strip_shortcodes($content));
+
+    // Check if the content length exceeds the limit
+    if (strlen($content) > $limit) {
+        $content = substr($content, 0, $limit) . '...';
+    }
+
+    return $content;
 }
-add_filter('excerpt_more', 'custom_excerpt_more');
+
+class Custom_Walker_Nav_Menu extends Walker_Nav_Menu {
+	// Start each element
+	public function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+		$classes = empty($item->classes) ? [] : (array) $item->classes;
+		$classes[] = 'item';
+
+		if (in_array('menu-item-has-children', $classes)) {
+			$classes[] = 'has-secondlevel';
+		}
+
+		$class_names = join(' ', array_filter($classes));
+		$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
+
+		$attributes  = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+
+		$output .= '<a' . $class_names . $attributes . '>';
+
+		$title = apply_filters('the_title', $item->title, $item->ID);
+		$output .= $title;
+
+		if (in_array('menu-item-has-children', $classes)) {
+			$output .= ' <img src="/images/common/new-icon.png" alt="new" class="website-nav">';
+		}
+
+		$output .= '</a>';
+	}
+}
+
+
+function initialize_swiper_slider() {
+	?>
+	<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Swiper('.swiper-container', {
+                loop: true, // Enable continuous loop
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                slidesPerView: 1,
+                spaceBetween: 0,
+                breakpoints: {
+                    768: {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    },
+                    1024: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                },
+            });
+        });
+	</script>
+	<?php
+}
+add_action('wp_footer', 'initialize_swiper_slider');
+
+function add_custom_taxonomy_column($columns) {
+	// Add a new column for the taxonomy
+	$columns['custom_taxonomy'] = 'Categories'; // Replace "Categories" with your taxonomy name
+	return $columns;
+}
+add_filter('manage_car-model_posts_columns', 'add_custom_taxonomy_column'); // Replace "car-model" with your custom post type slug
+
+function display_custom_taxonomy_column($column, $post_id) {
+	if ($column === 'custom_taxonomy') {
+		// Get taxonomy terms for the current post
+		$terms = get_the_terms($post_id, 'car-type'); // Replace "your_taxonomy" with your taxonomy slug
+
+		if (!empty($terms) && !is_wp_error($terms)) {
+			// Display the terms as a comma-separated list
+			$term_names = wp_list_pluck($terms, 'name');
+			echo esc_html(implode(', ', $term_names));
+		} else {
+			echo '—'; // If no terms, display a dash
+		}
+	}
+}
+add_action('manage_car-model_posts_custom_column', 'display_custom_taxonomy_column', 10, 2); // Replace "car-model" with your custom post type slug
+
+function get_field_by_language($field_key, $default_lang = 'en') {
+	// Check if the 'lang' parameter exists in the URL
+	$lang = isset($_GET['lang']) ? $_GET['lang'] : $default_lang;
+
+	// Get the current post ID
+	global $post;
+	$post_id = $post->ID;
+
+	// Fetch the field data
+	$field_data = get_field($field_key, $post_id);
+//    var_dump($field_data); exit();
+
+	// If a language-specific field exists, return it
+	$localized_field_key = $field_key;
+
+	if($lang !== 'en') {
+		$localized_field_key = $field_key . '_' . $lang;
+	}
+//    var_dump($localized_field_key);
+	if (isset($field_data[$localized_field_key])) {
+		return $field_data[$localized_field_key];
+	}
+
+	// Fallback to the default language field
+	return isset($field_data[$field_key]) ? $field_data[$field_key] : '';
+}
+//var_dump(5555);
+//die(444);
+
+add_filter('show_admin_bar', '__return_true');

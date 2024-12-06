@@ -5,72 +5,35 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/logo_main․png" type="image/x-icon">
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/logo_main․png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-<?php wp_head(); ?>
+    <!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcVJMS4L8bepDHAimvBgMC6nrux1IK8cc"></script>-->
+
+	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header class="header">
-    <div class="container max-container">
-        <div class="row header-row">
-            <div class="col-xl-2 col-lg-2 col-9">
+<header id="cti-header" class="txt-uppercase d-fixed" style="opacity: 1; display: block; top: 0px;">
+    <div class="default-menu">
+        <div class="logo-wrap" style="height: 44px;"></div>
+        <div class="menu-wrap iconfont">
+            <div class="menu_logo menu_active">
+<!--                <a href="https://www.hongqi-auto.com/"> <img src="./home/logo.png" class="logo" alt="logo"-->
+<!--                                                             style="display: none;"></a>-->
                 <a class="header-logo-a" href="<?php _e(home_url())?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo_main.png" alt="logo" class="header-logo"/>
-                     <span><<Քյավառ Սերվիս>> ՍՊԸ</span>
+                    <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png"  alt="logo" class="logo"/>
                 </a>
 
             </div>
-            <div class="col-xl-8 col-lg-10 header-menu">
-                <nav class="nav">
-                    <ul class="menu">
-                        <?php
-                        wp_nav_menu( array(
-                            'theme_location' => 'primary-menu',
-                        ) );
-                        ?>
-                    </ul>
-                </nav>
-                <a class="phone-header-icon d-none" href="tel:747 5000 747">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/phone-icon.svg" alt="logo"/>
-                </a>
-            </div>
-            <div class="col-2 header-phone-col">
-                <div class="header-phone-div">
-                                            <?php
-                                            $phone_number = get_field('phone_2', 'option');
-                                            $phone_image = get_field('phone_icon', 'option');
-                                            $phone_display = get_field('phone_display_2', 'option');
-                                            ?>
-                    <a class="header-phone" href="tel:<?php _e($phone_number)?>">
-                       <span>Հեռ։</span> <span><?php _e($phone_display)?></span></a>
-                </div>
-            </div>
-            <div class="mobile-header-menu col-lg-9 col-3">
-                <a class="phone-header-icon" href="tel:<?php _e($phone_number)?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/phone-icon.svg" alt="logo"/>
-                </a>
-                <input id="menu-toggle" type="checkbox"/>
-                <label class='menu-button-container' for="menu-toggle">
-                    <div class='menu-button'></div>
-                </label>
-                <ul class="mobile-menu">
-					<?php
-					wp_nav_menu( array(
-						'theme_location' => 'mobile-menu',
-						'menu_class' => 'mobile-menu', // Add your custom class here
-					) );
-					?>
-<!--                    <li class="nav-item">-->
-<!--                        <a href="#custom-glass">Products</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="#hardware">Hardware and finishes</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a href="#estimate">Contact us</a>-->
-<!--                    </li>-->
-                </ul>
-            </div>
+				<?php
+				wp_nav_menu([
+					'theme_location' => 'primary-menu', // Replace with your theme location
+					'menu_class'     => 'menu',
+					'container'      => false,
+					'walker'         => new Custom_Walker_Nav_Menu(), // Custom walker
+				]);
+				?>
         </div>
     </div>
 </header>
