@@ -57,6 +57,12 @@ a:active, a:hover, a:link, a:visited {
     position: fixed;
 }
 
+.g-mask {
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
 .iconfont {
     font-size: 16px;
     font-style: normal;
@@ -788,6 +794,248 @@ section.news-information .column-content .column-item img {
     width: 70%;
 }
 
+/* -PAGE -CONTACT */
+
+.page-contact header {
+    height: auto;
+}
+
+.page-contact header img {
+    width: 100%;
+}
+
+.page-contact .page-contact-content {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.page-contact .application_content_email {
+    max-width: 1750px;
+    /*width: 90vw;*/
+    margin: 2% auto 0;
+    display: flex;
+    padding: 16px 0;
+    height: 10vw;
+    background-color: #ececec;
+}
+
+.page-contact section.suggestion {
+    margin-top: 4%;
+}
+
+.page-contact section.suggestion h2 {
+    font-size: 1.5vw;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 4% 0;
+}
+
+.page-contact section.suggestion .wpcf7-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-contact section.suggestion .wpcf7-form label {
+    font-size: .75vw;
+    color: #939393;
+    text-transform: uppercase;
+}
+
+.page-contact section.suggestion .wpcf7-form input ,
+.page-contact section.suggestion .wpcf7-form textarea {
+    border-width: 0 0 1px;
+    border-color: #e6e5e5;
+    text-align: left;
+    padding-left: 0;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    font-size: .9vw;
+    box-sizing: border-box;
+    color: #000;
+    outline: none;
+    width: 100%;
+}
+
+.page-contact section.suggestion .wpcf7-form input[type="submit"] {
+    padding: 1em 2em;
+    width: 100%;
+    background-color: #c7c7c7;
+    color: #eeeeef;
+    transition: all .3s;
+    font-size: 1vw;
+    border: none;
+    text-align: center;
+}
+
+.page-contact section.suggestion .wpcf7-form input[type="submit"]:hover {
+    background-color: #343c45;
+}
+
+
+.page-contact section.suggestion .wpcf7-form textarea {
+    color: #000;
+    width: 100%;
+    height: 26em;
+    padding: 1em;
+    margin-top: 1%;
+    box-sizing: border-box;
+    outline: none;
+    border: 1px solid #000;
+}
+
+.page-contact section.suggestion .wpcf7-form input::placeholder,
+.page-contact section.suggestion .wpcf7-form textarea ::placeholder {
+    color: rgba(0, 0, 0, 0.55)
+}
+
+.page-contact section.suggestion .wpcf7-form .left-block {
+    width: 40%;
+}
+
+.page-contact section.suggestion .wpcf7-form .right-block {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.page-contact section.suggestion .wpcf7-form .right-block > p {
+    width: 100%;
+}
+
+.page-contact section.suggestion .wpcf7-form .right-block .c-block {
+    margin-top: 3.2%;
+    width: 100%;
+}
+
+.page-contact section.suggestion .wpcf7-form .right-block .c-block.half {
+    width: 48%;
+}
+
+.page-contact section.suggestion .wpcf7-form .right-block .c-block:first-child {
+    margin-top: 0;
+}
+
+.page-contact .application_content_email .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 20%;
+}
+
+.page-contact .application_content_email .item.item_right {
+    width: 80%;
+    font-size: 1.2vw;
+    font-weight: 500;
+    border-left: 2px solid  #bdbdbd;;
+}
+
+/* -PAGE -LIBRARY */
+
+.page-library {
+    padding-bottom: 8%;
+}
+
+.page-library .lib-container {
+    width: 91%;
+    margin: 0 auto;
+}
+
+/*.page-library .product-row {*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    margin-bottom: 20px;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+.page-library .product-item {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.page-library .product-item .product-con {
+    width: 100%;
+    height: 100%;
+}
+
+.page-library .product-item .bottom-mask {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.page-library .product-item .bottom-mask .mask-text {
+    flex: 1;
+    padding-left: 4px;
+}
+
+.page-library .product-item .bottom-mask .mask-icon {
+    flex: 1;
+    text-align: right;
+    height: 4vw;
+    max-width: 24%;
+    margin-right: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.page-library .product-item .bottom-mask .mask-icon > div {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.page-library .product-item .bottom-mask .mask-icon > div a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.page-library .product-item .bottom-mask .mask-icon > div i {
+    font-size: 1.5vw;
+    color: #fff;
+}
+
+.page-library .product-item .bottom-mask .mask-icon > div:hover {
+    background: #fff;
+}
+
+.page-library .product-item .bottom-mask .mask-icon > div:hover i {
+    color: #0c1924;
+}
+
+.page-library  .title {
+    font-weight: normal;
+    margin-top: 7%;
+}
+
+
+
+.page-library .product-item .product-con img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* SMART SLIDER */
 .page-home div#n2-ss-2 .nextend-bullet-bar .n2-bullet {
     width: 30px;
@@ -799,4 +1047,75 @@ section.news-information .column-content .column-item img {
 .page-home div#n2-ss-2 .nextend-bullet-bar .n2-bullet.n2-active {
     height: 4px;
     background: rgba(149, 151, 151);
+}
+
+
+/* OVERLAY CUSTOM LIGHTBOX */
+
+.g-popup {
+    background-color: rgba(0, 0, 0, .8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-popup img.act, .g-popup.act {
+    opacity: 1;
+}
+
+.g-popup, .g-popup img {
+    transition: opacity .7s;
+    opacity: 0;
+}
+
+.g-popup .iconclose1 {
+    color: #fff;
+    font-size: 2em;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    cursor: pointer;
+    transition: all .3s;
+    z-index: 3;
+}
+
+.g-popup .ele-wrap {
+    position: relative;
+    width: 100vmin;
+    width: 120vmin;
+    max-width: 100%;
+}
+.g-popup .ele-wrap img, .g-popup .ele-wrap video {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+.g-popup img.act, .g-popup.act {
+    opacity: 1;
+}
+
+.g-popup, .g-popup img {
+    transition: opacity .7s;
+    opacity: 0;
+}
+
+.g-popup .ele-wrap::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: #666;
+    z-index: 1;
+    background: url(https://www.hongqi-auto.com/images/common/hongqi.jpg) 50% no-repeat;
+    background-size: 80%;
+    width: 100%;
+    height: 100%;
+    min-width: calc(100vw* .4);
+    min-height: calc(100vh / 2);
+}
+
+.g-popup .iconclose1:hover {
+    transform: rotate(180deg);
 }

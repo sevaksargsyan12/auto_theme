@@ -87,23 +87,72 @@
         background: none;
         color: #fff;
     }
-</style>
 
+    .subscription-footer > p  {
+        display: flex;
+    }
+
+    .subscription-footer > p input[type="email"] {
+        background-color: #b0b0b0;
+        color: #fff;
+        font-size: 1.56vw;
+        padding: 0 4%;
+        line-height: 2em;
+        width: 100%;
+        box-sizing: border-box;
+        font-style: italic;
+        height: 100%;
+        border: none;
+        outline: none;
+    }
+
+    .subscription-footer > p input[type="submit"] {
+        line-height: 3em;
+        box-sizing: border-box;
+        padding: 0 2%;
+        transition: all .3s;
+        background: #8a8a8a;
+        color: #fff;
+        border:none;
+    }
+
+    .subscription-footer > p input::placeholder {
+        color: #fff;
+    }
+
+    .subscription-footer > p input[type="submit"]:hover {
+        background: #6c6b6b;
+    }
+
+</style>
+<?php
+
+$current_language = pll_current_language();
+$contact_form_shortcode = '[contact-form-7 id="27e531f" title="Footer subscription En"]';
+if ($current_language === 'hy') {
+    $contact_form_shortcode = '[contact-form-7 id="95d7bb8" title="Footer subscription"]';
+}
+
+$email = get_field('email', 'option');
+
+?>
 <footer id="cti-footer">
     <div class="contact">
         <div class="footer-title">Stay informed</div>
         <p>To keep you in the loop of our latest news, register now for our email newsletter.</p>
         <div class="email-wrap">
-            <div class="input">
-                <input class="email" type="email" name="email" required="" aria-required="true" autocomplete="email"
-                       placeholder="Your email address">
-            </div>
-            <a href="javascript:;" class="button">
-                <!-- <div class="button"> -->
-                <span class="iconfont iconarrow-right"></span>
-                <button>Sign up now</button>
-                <!-- </div> -->
-            </a>
+<!--            <div class="input">-->
+<!--                <input class="email" type="email" name="email" required="" aria-required="true" autocomplete="email"-->
+<!--                       placeholder="Your email address">-->
+<!--            </div>-->
+<!--            <a href="javascript:;" class="button">-->
+<!--                <span class="iconfont iconarrow-right"></span>-->
+<!--                <button>Sign up now</button>-->
+<!--            </a>-->
+            <?php
+
+            _e(do_shortcode($contact_form_shortcode));
+            ?>
         </div>
         <div class="agree-wrap">
             <div class="agree-icon show-switch"></div>
@@ -116,7 +165,7 @@
     </div>
     <div class="follow">
         <div class="footer-title">
-            CONTACT US:<a href="mailto:hq_iec@faw.com.cn">hq_iec@faw.com.cn</a>
+            CONTACT US:<a href="mailto:<?php _e($email); ?>"><?php _e($email); ?></a>
         </div>
         <p>
             Follow us and use following social media platforms to get in contact with us and to

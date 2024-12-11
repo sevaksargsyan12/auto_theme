@@ -64,7 +64,8 @@ function custom_theme_scripts() {
 
     wp_enqueue_script('hgq-single-car-post-js', get_template_directory_uri() . '/js/single-car-post.js', array('jquery'));
     wp_enqueue_script('hgq-custom-js', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'));
-
+    // Enqueue custom JavaScript file
+    wp_enqueue_script('custom-lightbox-js', get_template_directory_uri() . '/js/lightbox.js', array('jquery'));
 //    $translation_array = array(
 //        'ajax_url' => admin_url('admin-ajax.php'),
 //        'directory_uri' =>  get_template_directory_uri(),
@@ -236,37 +237,37 @@ class Custom_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 function initialize_swiper_slider() {
 	?>
-	<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            new Swiper('.swiper-container', {
-                loop: true, // Enable continuous loop
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                slidesPerView: 1,
-                spaceBetween: 0,
-                breakpoints: {
-                    768: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
-                    },
-                    1024: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                    },
-                },
-            });
-        });
-	</script>
+<!--	<script>-->
+<!--        document.addEventListener('DOMContentLoaded', function () {-->
+<!--            new Swiper('.swiper-container', {-->
+<!--                loop: true, // Enable continuous loop-->
+<!--                autoplay: {-->
+<!--                    delay: 5000,-->
+<!--                    disableOnInteraction: false,-->
+<!--                },-->
+<!--                pagination: {-->
+<!--                    el: '.swiper-pagination',-->
+<!--                    clickable: true,-->
+<!--                },-->
+<!--                navigation: {-->
+<!--                    nextEl: '.swiper-button-next',-->
+<!--                    prevEl: '.swiper-button-prev',-->
+<!--                },-->
+<!--                slidesPerView: 1,-->
+<!--                spaceBetween: 0,-->
+<!--                breakpoints: {-->
+<!--                    768: {-->
+<!--                        slidesPerView: 1,-->
+<!--                        spaceBetween: 10,-->
+<!--                    },-->
+<!--                    1024: {-->
+<!--                        slidesPerView: 1,-->
+<!--                        spaceBetween: 20,-->
+<!--                    },-->
+<!--                },-->
+<!--            });-->
+<!--        });-->
+<!--	</script>-->
 	<?php
 }
 add_action('wp_footer', 'initialize_swiper_slider');
@@ -324,3 +325,22 @@ function get_field_by_language($field_key, $default_lang = 'en') {
 //die(444);
 
 add_filter('show_admin_bar', '__return_true');
+
+// English and Armenian Copyright Block
+function display_copyright_block() {
+    $current_language = pll_current_language();
+    $year = date('Y');
+    ?>
+    <div style="text-align: center; padding: 10px; background: #f1f1f1; font-size: 14px;">
+        <p>
+            <?php if($current_language == 'hy') {?>
+            Copyright © <?php echo $year; ?> | All rights reserved, created by SimportS.
+            <?php } else  {?>
+            Copyright © <?php echo $year; ?> | Բոլոր իրավունքները պաշտպանված են, ստեղծվել է SimportS-ի կողմից:
+            <?php }?>
+        </p>
+    </div>
+    <?php
+}
+add_action('wp_footer', 'display_copyright_block');
+?>

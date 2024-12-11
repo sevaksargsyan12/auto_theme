@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // car models by category in home page
 jQuery(document).ready(function ($) {
+    jQuery('.new_blank').attr('target', '_blank');
+
     // Check active menu item
     if(jQuery('.single-car-model').length) {
         jQuery('.models-menu-item').addClass('current-menu-item');
@@ -115,7 +117,7 @@ jQuery(document).ready(function ($) {
 document.addEventListener("DOMContentLoaded", function () {
     const carGroup = document.querySelector(".changing-over .car-group");
     setTimeout(() => {
-        carGroup.classList.add("move");
+        carGroup?.classList?.add("move");
     }, 0); // Wait 1 second before starting the transition
 });
 
@@ -222,3 +224,136 @@ jQuery(document).ready(function ($) {
 
 })
 
+
+// Library
+
+function loadImage(url, callback) {
+    var img = new Image(); //鍒涘缓涓€涓狪mage瀵硅薄锛屽疄鐜板浘鐗囩殑棰勪笅杞�    銆�
+    img.src = url;
+    if (img.complete) {
+        // 濡傛灉鍥剧墖宸茬粡瀛樺湪浜庢祻瑙堝櫒缂撳瓨锛岀洿鎺ヨ皟鐢ㄥ洖璋冨嚱鏁�
+        callback && callback(img);
+        return; // 鐩存帴杩斿洖锛屼笉鐢ㄥ啀澶勭悊onload浜嬩欢
+    }
+    img.onload = function () {
+        //鍥剧墖涓嬭浇瀹屾瘯鏃跺紓姝ヨ皟鐢╟allback鍑芥暟
+        callback && callback(img);
+    };
+    img.onerror = function () {
+        callback && callback(img);
+    };
+}
+
+window.global_popup = (type, src, poster) => {
+    let typeName, srcPath, posterPath;
+
+    if (type === "data") {
+        typeName = src?.getAttribute("data-type");
+        srcPath = src?.getAttribute("data-src");
+        posterPath = src?.getAttribute("data-poster");
+    } else {
+        typeName = type;
+        srcPath = src;
+    }
+
+    if (!srcPath) {
+        alert("Coming soon!");
+        return;
+    }
+
+    // Simplify the path manipulation
+    const resPath = srcPath.split("/").slice(4).join("/");
+
+    if (!resPath) {
+        alert("Coming soon!");
+        return;
+    }
+
+    const defaultVideoSrc = "https://www.hongqi-auto.com/storage/videos/cartype.mp4";
+    const html = typeName === "video"
+        ? `<video src="${srcPath || defaultVideoSrc}" controls autoplay poster="${poster || posterPath}"></video>`
+        : `<img src="${srcPath}" alt="Popup Image" />`;
+
+    const template = `
+        <div class="g-mask g-popup">
+            <div class="iconfont iconclose1">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <div class="ele-wrap">${html}</div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML("beforeend", template);
+
+    if (typeName !== "video") {
+        loadImage(srcPath, () => {
+            document.querySelector(".g-popup img")?.classList.add("act");
+        });
+    }
+
+    setTimeout(() => {
+        document.querySelector(".g-popup")?.classList.add("act");
+    }, 50);
+};
+
+
+function closePopup() {
+    jQuery("body").find(".g-popup").removeClass("act").delay(1000).remove();
+}
+
+jQuery(function ($){
+    $(".product-row.images").delegate(".iconsearch", "click", function () {
+        let pic = $(this)
+            .parents(".bottom-mask")
+            .children(".mask-icon")
+            .find("a")
+            .data("src");
+        console.log('pic',pic);
+        global_popup("pic", pic);
+    });
+
+    $(".product-row.videos").delegate(".iconsearch", "click", function () {
+        let pic = $(this)
+            .parents(".bottom-mask")
+            .children(".mask-icon")
+            .find("a")
+            .data("src");
+        console.log('video',pic);
+        global_popup("video", pic);
+    });
+
+    $(".technology_row").delegate(".iconsearch", "click", function () {
+        let pic = $(this)
+            .parents(".bottom-mask")
+            .children(".mask-icon")
+            .find("a")
+            .data("src");
+        global_popup("pic", pic);
+    });
+
+    jQuery("body").delegate(".iconclose1", "click", closePopup);
+})
+
+jQuery(document).on('click', 'a.hgq-download', function(event) {
+    event.preventDefault(); // Prevent default link behavior
+
+    const src = jQuery(this).attr('data-src'); // Get the data-src attribute
+    if (!src) {
+        alert('No source found to download!');
+        return;
+    }
+
+    // Ensure the source has a valid URL format
+    const fullSrc = src.startsWith('http') || src.startsWith('//') ? src : `https://${src}`;
+
+    // Create an anchor element to trigger the download
+    const downloadLink = document.createElement('a');
+    downloadLink.href = fullSrc;
+    downloadLink.download = '';
+
+    // Append the anchor to the document, trigger the download, and remove it
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    document.body.removeChild(downloadLink);
+});
