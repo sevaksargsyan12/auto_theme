@@ -30,7 +30,7 @@
                     ?>
                     <div class="column-item col3 d-ani d-up">
                         <a href="<?php _e(get_permalink()) ?>" title="1">
-                            <div class="img-ani-wrap" style="height: 272px;">
+                            <div class="img-ani-wrap">
                                 <img class="d-img img-ani" src="<?php _e(esc_url($featured_img_url));?>" alt="<?php _e(esc_attr(get_the_title($post_id)));?>">
                             </div>
                             <div class="news-title  two-lines"><?php  _e(get_the_excerpt());?></div>

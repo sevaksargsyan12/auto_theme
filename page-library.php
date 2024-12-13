@@ -59,7 +59,7 @@ if ($current_language === 'hy') {
                                     src="<?php _e(esc_url($image['url'])); ?>"/>
                         </div>
                         <div class="bottom-mask">
-                            <div class="mask-text single-line"><span><?php _e(esc_url($image['title'])); ?></span></div>
+                            <div class="mask-text single-line"><span><?php _e(($image['title'])); ?></span></div>
                             <div class="mask-icon">
                                 <div class="iconxiazai1">
                                     <a href="javascript:;" class="hgq-download" data-src="<?php _e(esc_url($image['url'])); ?>">
@@ -100,7 +100,7 @@ if ($current_language === 'hy') {
                                         src="<?php _e($image); ?>"/>
                             </div>
                             <div class="bottom-mask">
-                                <div class="mask-text single-line"><span><?php _e(esc_url($title)); ?></span></div>
+                                <div class="mask-text single-line"><span><?php _e(($title)); ?></span></div>
                                 <div class="mask-icon">
                                     <div class="iconxiazai1">
                                         <a href="javascript:;" class="hgq-download" data-src="<?php _e(esc_url($url)); ?>">

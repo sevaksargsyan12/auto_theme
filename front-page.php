@@ -21,7 +21,7 @@ get_header();
     if (!empty($car_types)): ?>
         <section class="categories-and-models cartype txt-uppercase">
             <h2 class="title d-opacity delay100">
-                EXPLORE hongqi
+                <?php _e(hg_translate('hg_explore'));?> hongqi
             </h2>
             <ul class="cartype-name categories-tabs act-switch d-opacity delay200">
                 <?php foreach ($car_types as $index => $car_type): ?>
@@ -105,7 +105,7 @@ get_header();
             <div class="describe-group">
                 <div class="describe-item">
                     <h2>AAAAAA</h2>
-                    <a href="">Explore</a>
+                    <a href=""><?php _e(hg_translate('hg_explore'));?></a>
                 </div>
             </div>
             <div class="car-group act-switch" id="car-group" style="height: 284.128px;">
@@ -246,8 +246,7 @@ get_header();
                     $delay = 'delay' . $duration;
                 }
                 ?>
-                <div class="column-item overflow-hidden <?php _e($col_class); ?> <?php _e($duration); ?> img-ani-wrap d-ani <?php _e($display_position); ?>"
-                     style="height: 353.6px;">
+                <div class="column-item overflow-hidden <?php _e($col_class); ?> <?php _e($duration); ?> img-ani-wrap d-ani <?php _e($display_position); ?>">
                     <a target="_blank" href="<?php _e($item['link_to_page']); ?>"
                        title="hongqi <?php _e($item["title_of_item"]); ?>">
                         <img class="d-img img-ani" alt="hongqi" src="<?php _e($item["banner"]); ?>">
@@ -295,7 +294,7 @@ get_header();
                         ?>
                         <div class="column-item col3 d-ani d-up">
                             <a href="<?php _e(get_permalink()) ?>" title="1">
-                                <div class="img-ani-wrap" style="height: 272px;">
+                                <div class="img-ani-wrap">
                                     <img class="d-img img-ani" src="<?php _e(esc_url($featured_img_url));?>" alt="<?php _e(esc_attr(get_the_title($post_id)));?>">
                                 </div>
                                 <div class="news-title  two-lines"><?php  _e(get_the_excerpt());?></div>

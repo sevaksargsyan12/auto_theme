@@ -331,9 +331,9 @@ function display_copyright_block() {
     $current_language = pll_current_language();
     $year = date('Y');
     ?>
-    <div style="text-align: center; padding: 10px; background: #f1f1f1; font-size: 14px;">
-        <p>
-            <?php if($current_language == 'hy') {?>
+    <div style="text-align: center; padding: 10px; background: #f1f1f1; font-size: 10px;">
+        <p style="margin-bottom: 0">
+            <?php if($current_language == 'en') {?>
             Copyright © <?php echo $year; ?> | All rights reserved, created by SimportS.
             <?php } else  {?>
             Copyright © <?php echo $year; ?> | Բոլոր իրավունքները պաշտպանված են, ստեղծվել է SimportS-ի կողմից:
@@ -343,4 +343,177 @@ function display_copyright_block() {
     <?php
 }
 add_action('wp_footer', 'display_copyright_block');
+
+// TRANSLATIONS
+
+// Add a custom options page
+function custom_translation_options_page() {
+    add_options_page(
+        'Translation Manager', // Page title
+        'Translations',        // Menu title
+        'manage_options',      // Capability
+        'translation-manager', // Menu slug
+        'render_translation_page' // Callback function
+    );
+}
+add_action('admin_menu', 'custom_translation_options_page');
+
+// Render the options page
+function render_translation_page() {
+    ?>
+    <div class="wrap">
+        <h1>Translation Manager</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('custom_translation_options');
+            do_settings_sections('translation-manager');
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Register custom settings
+function custom_translation_settings() {
+    register_setting('custom_translation_options', 'translation_fields');
+
+    add_settings_section(
+        'translation_section',
+        'Manage Translations',
+        'translation_section_callback',
+        'translation-manager'
+    );
+
+    add_settings_field(
+        'dynamic_translation_fields',
+        'Translation Fields',
+        'dynamic_translation_fields_callback',
+        'translation-manager',
+        'translation_section'
+    );
+}
+add_action('admin_init', 'custom_translation_settings');
+
+// Section description
+function translation_section_callback() {
+    echo '<p>Add keys and translations for your fields below.</p>';
+}
+function dynamic_translation_fields_callback() {
+    $translation_fields = get_option('translation_fields', []);
+    ?>
+    <div id="translation-fields-container">
+        <?php if (!empty($translation_fields)) : ?>
+            <?php foreach ($translation_fields as $key => $translations) : ?>
+                <div class="translation-group">
+                    <div style="margin-top: 4px;">
+                    <input
+                            type="text"
+                            name="translation_fields[new_<?php echo esc_attr($key); ?>][key]"
+                            value="<?php echo esc_attr($key); ?>"
+                            placeholder="Field Key" />
+                    <input
+                            type="text"
+                            name="translation_fields[new_<?php echo esc_attr($key); ?>][hy]"
+                            value="<?php echo esc_attr($translations['hy'] ?? ''); ?>"
+                            placeholder="Armenian Translation (hy)" />
+                    <input
+                            type="text"
+                            name="translation_fields[new_<?php echo esc_attr($key); ?>][en]"
+                            value="<?php echo esc_attr($translations['en'] ?? ''); ?>"
+                            placeholder="English Translation (en)" />
+                    <button type="button" style="background: red;" class="remove-translation-field">Remove</button>
+                    </div>
+
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <button type="button" style="background: #0d99d5; color: #fff;margin-top: 4px;" id="add-translation-field">Add Field</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('translation-fields-container');
+            const addFieldButton = document.getElementById('add-translation-field');
+
+            addFieldButton.addEventListener('click', () => {
+                const index = container.children.length;
+                const newFieldGroup = document.createElement('div');
+                newFieldGroup.classList.add('translation-group');
+                newFieldGroup.innerHTML = `
+                    <input type="text" name="translation_fields[new_${index}][key]" placeholder="Field Key" />
+                    <input type="text" name="translation_fields[new_${index}][hy]" placeholder="Armenian Translation (hy)" />
+                    <input type="text" name="translation_fields[new_${index}][en]" placeholder="English Translation (en)" />
+                    <button type="button" class="remove-translation-field">Remove</button>
+                `;
+                container.appendChild(newFieldGroup);
+            });
+
+            container.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-translation-field')) {
+                    e.target.closest('.translation-group').remove();
+                }
+            });
+        });
+    </script>
+    <?php
+}
+
+
+
+// Process data before saving to the database
+function save_translation_fields_as_object($value) {
+    $processed_data = [];
+
+    foreach ($value as $entry) {
+        if (!empty($entry['key'])) {
+            $key = $entry['key'];
+            $processed_data[$key] = [
+                'hy' => $entry['hy'] ?? '',
+                'en' => $entry['en'] ?? '',
+            ];
+        }
+    }
+
+    return $processed_data;
+}
+add_filter('pre_update_option_translation_fields', 'save_translation_fields_as_object');
+
+if (!function_exists('hg_translate')) {
+    /**
+     * Get and safely display a translation.
+     *
+     * @param string $key The translation key to fetch.
+     * @param string $current_language The current language (e.g., 'hy', 'en').
+     * @return string The translated text or the key if the translation is missing.
+     */
+    function hg_translate($key) {
+        // Fetch all translations from the options.
+        $translations = get_option('translation_fields', []);
+        if(pll_current_language() !== null)
+        $current_language = pll_current_language();
+        else $current_language = "en";
+
+        // Check if the key exists and if the translation for the current language is available.
+        if (isset($translations[$key]) && !empty($translations[$key][$current_language])) {
+            return esc_html($translations[$key][$current_language]);
+        }
+
+        // If the key or translation is missing, return the key itself as a fallback.
+        return esc_html($key);
+    }
+}
+
+function hg_is_admin_user() {
+    // Get the current user object
+    $current_user = wp_get_current_user();
+
+    // Check if the user has the 'administrator' role
+    if (in_array('administrator', (array) $current_user->roles)) {
+        return true;
+    }
+
+    return false;
+}
+
+
 ?>

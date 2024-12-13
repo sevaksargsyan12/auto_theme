@@ -332,6 +332,8 @@ jQuery(function ($){
     });
 
     jQuery("body").delegate(".iconclose1", "click", closePopup);
+
+
 })
 
 jQuery(document).on('click', 'a.hgq-download', function(event) {
@@ -356,4 +358,97 @@ jQuery(document).on('click', 'a.hgq-download', function(event) {
     downloadLink.click();
 
     document.body.removeChild(downloadLink);
+});
+
+// header sticky effect
+
+jQuery(document).ready(function ($) {
+    // Cache the header and logo
+    var $header = $("#cti-header");
+    var $logo = $header.find(".menu_logo img");
+    var $menu = $header.find(".menu");
+
+    // Set a threshold for the scroll effect
+    var scrollThreshold = 50;
+
+    // Attach the scroll event
+    $(window).on("scroll", function () {
+        var scrollTop = $(this).scrollTop();
+        var screenWidth = $(window).width(); // Get the current screen width
+        var scrollThreshold = 100; // Set your scroll threshold
+
+        if (screenWidth > 800) { // Apply only to desktop screens
+            if (scrollTop > scrollThreshold) {
+                console.log('header gone effect');
+
+                // When scrolled past the threshold
+                $header.css({
+                    top: "-50px", // Adjust the reduced height
+                    transition: "top 0.3s ease",
+                });
+                $logo.css({
+                    opacity: 0,
+                    transition: "opacity 0.3s ease",
+                });
+                $menu.css({
+                    marginTop: "1rem",
+                    marginBottom: "0",
+                    lineHeight: "2em",
+                    transition: "opacity 0.3s ease",
+                });
+            } else {
+                console.log('header reset effect');
+
+                // When scrolled back to the top
+                $header.css({
+                    top: "0", // Adjust the original height
+                    transition: "top 0.3s ease",
+                });
+                $logo.css({
+                    opacity: 1,
+                    transition: "opacity 0.3s ease",
+                });
+                $menu.css({
+                    marginTop: "0",
+                    marginBottom: "1rem",
+                    lineHeight: "4em",
+                    transition: "line-height 0.3s ease",
+                });
+            }
+        }
+    });
+
+    $(window).on("resize", function () {
+        var screenWidth = $(window).width();
+        if (screenWidth <= 800) {
+            // Reset styles for smaller screens
+            $header.css({
+                top: "0", // Adjust the original height
+                transition: "top 0.3s ease",
+            });
+            $logo.css({
+                opacity: 1,
+                transition: "opacity 0.3s ease",
+            });
+            $menu.css({
+                marginTop: "0",
+                marginBottom: "1rem",
+                lineHeight: "4em",
+                transition: "line-height 0.3s ease",
+            });
+        }
+    });
+
+    //mobile
+    $('.menu-close-wrapper').on("click", function () {
+        jQuery('#menu-main-menu').removeClass('opened');
+        jQuery(this).addClass('d-none');
+    })
+
+    $('.mobile-burger-wrapper').on("click touchstart", function () {
+        jQuery('#menu-main-menu').addClass('opened');
+        jQuery('.menu-close-wrapper').removeClass('d-none');
+    })
+
+
 });

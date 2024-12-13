@@ -93,6 +93,10 @@
     }
 
     .subscription-footer > p input[type="email"] {
+        appearance: none; /* Removes browser-specific styles */
+        -webkit-appearance: none; /* Safari-specific */
+        -moz-appearance: none;
+        border-radius: 0;
         background-color: #b0b0b0;
         color: #fff;
         font-size: 1.56vw;
@@ -107,6 +111,10 @@
     }
 
     .subscription-footer > p input[type="submit"] {
+        appearance: none; /* Removes browser-specific styles */
+        -webkit-appearance: none; /* Safari-specific */
+        -moz-appearance: none;
+        border-radius: 0;
         line-height: 3em;
         box-sizing: border-box;
         padding: 0 2%;
@@ -123,6 +131,37 @@
     .subscription-footer > p input[type="submit"]:hover {
         background: #6c6b6b;
     }
+    
+    @media screen and (max-width: 640px) {
+        #cti-footer {
+            display: block;
+            font-size: 3.4vw;
+        }
+
+        #cti-footer .contact {
+            width: 100%;
+        }
+
+        #cti-footer .follow {
+            width: 100%;
+        }
+
+        #cti-footer .footer-title {
+            font-size: 4vw;
+        }
+
+        .subscription-footer > p input[type="email"] {
+            font-size: 2.56vw;
+        }
+
+        #cti-footer .contact .email-wrap {
+            margin: 4% 0;
+        }
+
+        #cti-footer .follow .icon {
+            width: 6.24vw;
+        }
+    }
 
 </style>
 <?php
@@ -134,12 +173,21 @@ if ($current_language === 'hy') {
 }
 
 $email = get_field('email', 'option');
+$translations = get_option('translation_fields', []);
+//if (!empty($translations)) {
+//    foreach ($translations as $key => $translation) {
+//        echo '<p>Key: ' . esc_html($key) . '</p>';
+//        echo '<p>Hy: ' . esc_html($translation['hy'] ?? '') . '</p>';
+//        echo '<p>En: ' . esc_html($translation['en'] ?? '') . '</p>';
+//    }
+//}
 
+//var_dump($translations);
 ?>
 <footer id="cti-footer">
     <div class="contact">
-        <div class="footer-title">Stay informed</div>
-        <p>To keep you in the loop of our latest news, register now for our email newsletter.</p>
+        <div class="footer-title"><?php _e(hg_translate('hg_stay_informed'));?></div>
+        <p><?php _e(hg_translate('hg_keep_latest_news'));?></p>
         <div class="email-wrap">
 <!--            <div class="input">-->
 <!--                <input class="email" type="email" name="email" required="" aria-required="true" autocomplete="email"-->
@@ -157,19 +205,18 @@ $email = get_field('email', 'option');
         <div class="agree-wrap">
             <div class="agree-icon show-switch"></div>
             <p>
-                I agree to the
-                <a class="agree_privacy_btn" target="_blank" href="./pages/Privacy-statement/Privacy-statement.html">Privacy
-                    Policy</a>
+                <a class="agree_privacy_btn" target="_blank" href="./pages/Privacy-statement/Privacy-statement.html">
+                    <?php _e(hg_translate('hg_agree_privacy'));?>
+                </a>
             </p>
         </div>
     </div>
     <div class="follow">
         <div class="footer-title">
-            CONTACT US:<a href="mailto:<?php _e($email); ?>"><?php _e($email); ?></a>
+            <?php _e(hg_translate('hg_constact_us'));?>:<a href="mailto:<?php _e($email); ?>"><?php _e($email); ?></a>
         </div>
         <p>
-            Follow us and use following social media platforms to get in contact with us and to
-            share your passion for the brand, products and services of Hongqi.
+            <?php _e(hg_translate('hg_follow_us'));?>
         </p>
 
         <?php

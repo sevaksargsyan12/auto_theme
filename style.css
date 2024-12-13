@@ -36,6 +36,16 @@ ol, ul {
     font-family: 'Montserrat', sans-serif;
 }
 
+/* wordpress editor*/
+
+figure.size-large.aligncenter {
+    width: 100%;
+}
+
+figure.size-large.aligncenter img {
+    width: 100%;
+}
+
 /* classes */
 
 .agree .d-flag .dlog, .agree .privacy,
@@ -257,13 +267,14 @@ a:active, a:hover, a:link, a:visited {
 
 #cti-header {
     width: 100%;
-    z-index: 9;
+    z-index: 9999;
     top: 0;
     font-size: .8vw;
     display: none;
 }
 
 #cti-header .default-menu {
+    padding-top: 44px;
     position: relative;
     z-index: 2;
     background-color: #f3f3f3;
@@ -275,7 +286,7 @@ a:active, a:hover, a:link, a:visited {
 }
 
 #cti-header .default-menu .menu-wrap .menu_logo {
-    width: 23%;
+    width: 18%;
     text-align: center;
     padding-bottom: 1.5vw;
 }
@@ -288,8 +299,13 @@ a:active, a:hover, a:link, a:visited {
     width: 4.86vw;
 }
 
+#cti-header .desktop-menu {
+    width: 82%;
+    display: flex;
+}
+
 #cti-header .menu {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
@@ -316,7 +332,7 @@ a:active, a:hover, a:link, a:visited {
 }
 
 #cti-header .menu .item.lang-item {
-    font-size: 10px;
+    font-size: 0.8vw;
 }
 
 #cti-header .menu a:hover ,
@@ -363,7 +379,7 @@ a:active, a:hover, a:link, a:visited {
 section.categories-and-models {
     text-align: center;
     font-size: 1vw;
-    margin: 5% 0;
+    margin: 7% 0;
     width: 100%;
 }
 
@@ -409,7 +425,8 @@ section.categories-and-models  .cartype-car-group {
     /*display: flex;*/
     /*align-items: center;*/
     /*flex-direction: column;*/
-    height: 248px;
+    /*height: 248px;*/
+    height: 14vw;
     position: relative;
 }
 
@@ -426,6 +443,7 @@ section.categories-and-models ul.cartype-car {
     z-index: 1;
     left: 50%;
     transform: translateX(-50%);
+    padding: 0;
 }
 
 section.categories-and-models ul.cartype-car.act {
@@ -462,7 +480,8 @@ section.changing-over {
 }
 
 section.changing-over > div.mountain-wrapper {
-    height: 500px;
+    /*height: 500px;*/
+    height: 26vw;
     display: flex;
     align-items: center;
     /*overflow: hidden;*/
@@ -491,6 +510,7 @@ section.changing-over .car-group {
 
 section.changing-over .d-enter .car-group {
     transition: right 3s linear, opacity 3s linear;
+    z-index: 99;
 }
 
 section.changing-over .d-enter .car-group.move {
@@ -536,7 +556,7 @@ section.changing-over .car-item-wrap .d-img {
 
 section.changing-over  .color-btn-group {
     position: relative;
-    z-index: 1;
+    z-index: 999;
     font-size: 1vw;
     height: calc(3.75vw + 6px + 4em);
     color: #333;
@@ -631,6 +651,7 @@ section.changing-over .changing_arrow {
     bottom: 0;
     margin: auto;
     cursor: pointer;
+    z-index: 999;
 }
 
 .changing-over .changing_arrow img {
@@ -729,6 +750,10 @@ section.news-information .column-content .column-item {
     font-weight: 700;
 }
 
+section.news-information .column-content .column-item .img-ani-wrap {
+    height: 20vw;
+}
+
 section.news-information .column-content .col3 {
     width: 32.2%;
 }
@@ -778,7 +803,9 @@ section.news-information .column-content .column-item img {
 
 /* -PAGE -MODELS */
 
-
+.page-models {
+    padding-top: 10px;
+}
 
 /* -PAGE -STORE */
 
@@ -954,7 +981,7 @@ section.news-information .column-content .column-item img {
 .page-library .product-item {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 20vw;
 }
 
 .page-library .product-item .product-con {
@@ -980,6 +1007,7 @@ section.news-information .column-content .column-item img {
 .page-library .product-item .bottom-mask .mask-text {
     flex: 1;
     padding-left: 4px;
+    font-size: 1vw;
 }
 
 .page-library .product-item .bottom-mask .mask-icon {
@@ -1092,6 +1120,7 @@ section.news-information .column-content .column-item img {
 }
 .g-popup img.act, .g-popup.act {
     opacity: 1;
+    z-index: 99999;
 }
 
 .g-popup, .g-popup img {
@@ -1119,3 +1148,468 @@ section.news-information .column-content .column-item img {
 .g-popup .iconclose1:hover {
     transform: rotate(180deg);
 }
+
+/* -MEDIA QUERIES- */
+
+@media screen and (min-width: 801px) {
+
+    body {
+        background: red;
+    }
+    .hg-mobile {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 1124px) {
+    #cti-header .default-menu {
+        padding-top: 24px;
+    }
+}
+
+@media screen  and (max-width: 992px) {/*bootstrap*/
+    /*    -page library mobile*/
+
+    .page-library .product-item {
+        height: 29vw;
+    }
+
+    .page-library .product-item .bottom-mask .mask-icon {
+        height: 5vw;
+    }
+
+    .page-library .product-item .bottom-mask .mask-icon > div i {
+        font-size: 2.5vw;
+    }
+
+    .page-library .product-item .bottom-mask .mask-text {
+        padding-left: 10px;
+        font-size: 1.5vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .hg-desktop {
+        display: none !important;
+    }
+
+    .hgq-post-car-container {
+        width: calc(100% - 40px);
+        margin: 0 auto;
+    }
+
+    /* -header mobile- */
+    #cti-header .desktop-menu {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        top: 0;
+    }
+
+    #cti-header .default-menu {
+        padding: 3% 0;
+        background-color: rgba(0, 0, 0, .8);
+    }
+
+    #cti-header .default-menu .menu-wrap {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #cti-header .default-menu .menu-wrap .mobile-burger-wrapper button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 4vw;
+    }
+
+    #cti-header .menu {
+        width: 100%;
+        height: 100vh;
+        margin-top: 0 !important;
+        padding: 0;
+        padding-top: 10vw !important;
+        display: none;
+        background: url(https://www.hongqi-auto.com/images/common/menu_bg.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    #cti-header .menu.opened {
+        display: block;
+    }
+
+    #cti-header .menu .lang-item {
+        display: none;
+    }
+
+
+    #cti-header .menu-close-wrapper {
+        position: absolute;
+        right: 2vw;
+        top: 1vw;
+        color: #000;
+        font-size: 5vw;
+        display: none;
+    }
+
+    #cti-header .menu.opened + .menu-close-wrapper {
+        display: block;
+    }
+
+    #cti-header .menu .item {
+        font-size: 2.4vw;
+    }
+
+
+    #cti-header .default-menu .menu-wrap .menu_logo {
+        /*width: auto;*/
+        padding-left: 4vw;
+        width: 12%;
+    }
+
+    #cti-header .default-menu .menu-wrap .menu_logo .logo {
+        width: 8.86vw;
+    }
+
+    #cti-header .mobile-language {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: right; */
+        align-items: center;
+        padding-right: 4vw;
+        width: 12%;
+    }
+
+    #cti-header .mobile-language .lang-item {
+        list-style: none;
+    }
+
+    #cti-header .mobile-language .lang-item span {
+        display: none;
+    }
+
+    /* -home mobile  */
+    section.categories-and-models h2 {
+        font-size: 2.4vw;
+    }
+
+    section.categories-and-models ul.categories-tabs li {
+        font-size: 2vw;
+    }
+
+    section.categories-and-models ul.cartype-car > li {
+        font-size: 1.4vw;
+    }
+
+    section.changing-over .describe-group a {
+        font-size: 1.2vw;
+    }
+
+    .column-name {
+        font-size: 2.4vw;
+    }
+
+    section.hongqi-ideal .column-content .column-item .cont {
+        font-size: 1.6vw;
+    }
+
+    section.hongqi-ideal .learn-more {
+        font-size: 1vw;
+    }
+
+    section.news-information .column-footer,
+    section.news-information .column-content .column-item .learn-more {
+        font-size: 1vw;
+    }
+
+    /*    -page store mobile */
+    .page-store .page-store-content > .map-wrapper,
+    .page-store .page-store-content > .address-wrapper {
+        width: 100%;
+        margin-bottom: 4vw;
+    }
+
+    .page-store .page-store-content {
+        margin-top: 4%;
+        flex-direction: column;
+    }
+
+    .page-store .address-template-part .type {
+        font-weight: 700;
+        font-size: 3.2vw;
+    }
+
+    .page-store .address-template-part .block p:not(.type) {
+        font-size: 1.8vw;
+    }
+
+    .page-store #map {
+        height: 400px;
+        width: 100%;
+    }
+
+    /*    -page contact mobile*/
+    .page-contact .application_content_email .item {
+        font-size: 2.8vw;
+    }
+
+    .page-contact .application_content_email .item.item_right {
+        font-size: 2.4vw;
+    }
+
+    .page-contact section.suggestion h2 {
+        font-size: 3vw;
+    }
+
+    .page-contact section.suggestion .wpcf7-form {
+        flex-direction: column;
+    }
+
+    .page-contact section.suggestion .wpcf7-form .left-block,
+    .page-contact section.suggestion .wpcf7-form .right-block {
+        width: 100%;
+    }
+
+    .page-contact section.suggestion .wpcf7-form label {
+        font-size: 1.75vw;
+    }
+
+    .page-contact section.suggestion .wpcf7-form input,
+    .page-contact section.suggestion .wpcf7-form textarea {
+        font-size: 1.6vw;
+    }
+
+    .page-contact section.suggestion .wpcf7-form input[type="submit"] {
+        font-size: 2vw;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    /*    -page library mobile*/
+
+    .page-library .product-item {
+        height: 58vw;
+    }
+
+    .page-library .product-item .bottom-mask .mask-icon {
+        height: 7vw;
+        max-width: 16%;
+    }
+
+    .page-library .product-item .bottom-mask .mask-text {
+        padding-left: 10px;
+        font-size: 2vw;
+    }
+
+    .page-library .title {
+        font-weight: normal;
+        margin-top: 11%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .hq-page {
+        margin-top: 120px;
+    }
+
+    #cti-header .menu .item {
+        font-size: 3.5vw;
+    }
+
+    #cti-header .menu-close-wrapper {
+        font-size: 8vw;
+    }
+
+    /*    -home page*/
+
+    .column-name,
+    section.categories-and-models h2 {
+        font-size: 4vw;
+    }
+
+    section.categories-and-models ul.categories-tabs li {
+        font-size: 3vw;
+    }
+
+    section.categories-and-models ul.cartype-car > li {
+        font-size: 2.4vw;
+    }
+
+    section.categories-and-models ul.cartype-car > li {
+        margin: 1% 1% 0;
+    }
+
+    section.categories-and-models ul.cartype-car > li img {
+        /* max-height: 160px; */
+        height: 11vw;
+    }
+
+    section.changing-over > div.mountain-wrapper {
+        /* height: 500px; */
+        height: 60vw;
+    }
+
+    section.changing-over .changing_arrow {
+        width: 14px;
+    }
+
+    section.changing-over > div.mountain-wrapper {
+        align-items: flex-start;
+    }
+
+    section.changing-over .car-group {
+        top:30%;
+        width: 96%;
+    }
+
+    section.changing-over .d-enter .car-group.move {
+        right: 2%;
+    }
+
+    section.changing-over .describe-group h2 {
+        font-size: 7.2vw;
+        margin: 3% 0 3%;
+    }
+
+    section.changing-over .describe-group a {
+        display: inline-block;
+        padding: 1em 2em;
+    }
+
+    section.changing-over .describe-group a {
+        font-size: 2.2vw;
+    }
+
+    .changing-over .color-btn-group {
+        margin-bottom: 8vw;
+    }
+
+    .changing-over .color-btn-group .color-btn {
+        padding: 0;
+    }
+
+    .changing-over .color-btn-group li img {
+        width: 6.75vw;
+        height: 6.75vw;
+    }
+
+    .changing-over .color-btn-group li {
+        font-size: 2vw;
+    }
+
+    section.hongqi-ideal .column-content .column-item {
+        width: 100%;
+    }
+
+    section.hongqi-ideal .column-content .column-item .cont {
+        font-size: 3.6vw;
+    }
+
+    section.hongqi-ideal .learn-more {
+        font-size: 2vw;
+    }
+
+    section.news-information .column-content .column-item {
+        width: 100%;
+        margin-bottom: 0.6vw;
+        border: 1px solid #C6C6C6;
+        padding: 4px;
+    }
+
+    section.news-information .column-content .column-item .img-ani-wrap {
+        height: auto;
+    }
+
+    section.news-information .news-title,
+    section.news-information .column-footer, section.news-information .column-content .column-item .learn-more {
+        font-size: 2vw;
+    }
+
+   /*    -page models mobile */
+
+   .page-models section.categories-and-models {
+        margin: 0;
+        margin-bottom: 8vh;
+    }
+
+    .page-models {
+        padding-top: 10px;
+        padding-bottom: 40px;
+    }
+
+
+/*    -page store mobile*/
+
+    .page-store #map {
+        height: 320px;
+        width: 100%;
+    }
+
+/*    -page contact mobile */
+
+
+    .page-contact .application_content_email {
+        margin: 6vw 0;
+    }
+    .page-contact section.suggestion h2 {
+        font-size: calc(3vw * 1.25);
+    }
+
+    .page-contact section.suggestion .wpcf7-form label {
+        font-size: calc(1.75vw * 1.25);
+    }
+
+    .page-contact section.suggestion .wpcf7-form input,
+    .page-contact section.suggestion .wpcf7-form textarea {
+        font-size: calc(1.6vw * 1.25);
+    }
+
+    .page-contact section.suggestion .wpcf7-form input[type="submit"] {
+        font-size: calc(2vw * 1.25);
+    }
+}
+
+@media screen and (max-width: 475px) {
+    #cti-header .menu .item {
+        font-size: 3.5vw;
+    }
+
+    #cti-header .menu-close-wrapper {
+        font-size: 8vw;
+    }
+
+/*    -page store mobile */
+
+    .page-store .address-template-part .type {
+        font-size: 4.2vw;
+    }
+
+    .page-store .address-template-part .block p:not(.type) {
+        font-size: 2.8vw;
+    }
+
+/*     -page contact mobile */
+
+    .page-contact section.suggestion .wpcf7-form .right-block .c-block.half {
+        width: 100%;
+    }
+
+    .page-contact section.suggestion .wpcf7-form label {
+        font-size: calc(1.75vw * 1.5);
+    }
+
+    .page-contact section.suggestion .wpcf7-form input,
+    .page-contact section.suggestion .wpcf7-form textarea {
+        font-size: calc(1.6vw * 1.5);
+    }
+
+    .page-contact section.suggestion .wpcf7-form input[type="submit"] {
+        font-size: calc(2vw * 1.5);
+    }
+}
+
+
+/*#wpadminbar:has(:not(#wp-admin-bar-customize)) {*/
+/*    display: none !important;*/
+/*}*/

@@ -13,7 +13,7 @@ get_header();
     if (!empty($car_types)): ?>
         <section class="categories-and-models cartype txt-uppercase">
             <h2 class="title d-opacity delay100">
-                EXPLORE hongqi
+                <?php _e(hg_translate('hg_explore'));?> hongqi
             </h2>
             <ul class="cartype-name categories-tabs act-switch d-opacity delay200">
                 <?php foreach ($car_types as $index => $car_type): ?>

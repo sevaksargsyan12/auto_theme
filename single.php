@@ -68,8 +68,8 @@ $post_id = get_the_ID();
 
 .fa-brands {
     color: #747474; /* Twitter blue */
-    font-size: 24px;
-    margin-right: 10px;
+    font-size: 1.8vw;
+    margin-right: 0.8vw;
 }
 
 .fa-brands:hover {
@@ -85,7 +85,11 @@ $post_id = get_the_ID();
 }
 
 .post-navigation strong {
-    font-size: .7vw;
+    font-size: .9vw;
+}
+
+.post-navigation .previous-post strong {
+    margin-left: -1.5vw;
 }
 
 .post-navigation .fa ,
@@ -102,11 +106,85 @@ $post_id = get_the_ID();
     color: #0d6efd; /* A different shade of blue on hover */
 }
 
+.single-post-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.fa-clock-o {
+    font-size: 2vw;
+}
+
+@media screen and (max-width: 800px) {
+    .single-post-container {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .detail-title {
+        font-size: 2.3vw;
+    }
+
+    .detail-date {
+        font-size: 2vw;
+    }
+
+    .post-content {
+        font-size: 1.8vw;
+    }
+
+    .fa-chevron-circle-right,
+    .fa-chevron-circle-left,
+    .fa-brands {
+        font-size: 2.8vw;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .single-post-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .single-post {
+        margin-top: 100px;
+        font-size: 1.5vw;
+    }
+
+    .detail-title {
+        font-size: calc(2.3vw * 1.5); /* Increased by 1.5 times */
+    }
+
+    .detail-date {
+        font-size: calc(2vw * 1.5); /* Increased by 1.5 times */
+    }
+
+    .post-content {
+        font-size: calc(1.8vw * 1.5); /* Increased by 1.5 times */
+    }
+
+    .fa-chevron-circle-right,
+    .fa-chevron-circle-left,
+    .fa-brands {
+        font-size: calc(2.8vw * 1.5); /* Increased by 1.5 times */
+    }
+
+    .post-navigation strong {
+        font-size: 1.2vw;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .single-post {
+        margin-top: 60px;
+    }
+}
+
 </style>
-<section class="container max-container single-post">
+<section class="max-container single-post-container single-post">
     <h1 class="txt-uppercase detail-title"><?php the_title(); ?></h1>
     <div class="detail-record">
-        <div class="detail-date"><i class="fa fa-clock-o" style="font-size:24px"></i>
+        <div class="detail-date"><i class="fa fa-clock-o"></i>
             <?php
             $post_date = get_the_date('Y-m-d');
             echo $post_date;
