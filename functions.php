@@ -516,4 +516,17 @@ function hg_is_admin_user() {
 }
 
 
+add_filter('site_transient_update_plugins', function($transient) {
+    if (isset($transient->response['advanced-custom-fields-pro/acf.php'])) {
+        unset($transient->response['advanced-custom-fields-pro/acf.php']);
+    }
+
+    if (isset($transient->response['all-in-one-wp-migration/all-in-one-wp-migration.php'])) {
+        unset($transient->response['all-in-one-wp-migration/all-in-one-wp-migration.php']);
+    }
+
+
+    return $transient;
+});
+
 ?>

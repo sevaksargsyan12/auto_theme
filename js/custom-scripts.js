@@ -450,5 +450,30 @@ jQuery(document).ready(function ($) {
         jQuery('.menu-close-wrapper').removeClass('d-none');
     })
 
+    //-page development
+
+        $('.page-development .video_btn').on('click', function() {
+            // Hide the banner image
+            $(this).siblings('img').hide();
+            $(this).hide();
+
+            // Get the video element and play the video
+            const video = $(this).siblings('video.video_con').get(0);
+            console.log({video})
+            $(video).removeClass('d-none');
+            if (video) {
+                video.play();
+            }
+        });
+
+    //-page achievement
+
+    $('.page-achievement  .show_more').on('click', function() {
+        // Hide the banner image
+       $items = $(this).parents('.items').find('.award_item');
+        $items.removeClass('d-none');
+        jQuery(this).hide();
+
+    });
 
 });

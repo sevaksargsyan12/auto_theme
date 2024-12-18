@@ -3,6 +3,7 @@
 
 get_header();
 //$page_id = get_the_ID();
+//var_dump($page_id);
 //$header_section = get_field('header_section', $page_id);
 ?>
 <main class="page-home">
@@ -247,7 +248,7 @@ get_header();
                 }
                 ?>
                 <div class="column-item overflow-hidden <?php _e($col_class); ?> <?php _e($duration); ?> img-ani-wrap d-ani <?php _e($display_position); ?>">
-                    <a target="_blank" href="<?php _e($item['link_to_page']); ?>"
+                    <a  href="<?php _e($item['link_to_page']); ?>"
                        title="hongqi <?php _e($item["title_of_item"]); ?>">
                         <img class="d-img img-ani" alt="hongqi" src="<?php _e($item["banner"]); ?>">
                         <div class="d-mask">
